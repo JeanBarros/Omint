@@ -1,5 +1,6 @@
 ﻿var postBack = false
 
+var agendamentoDuplicado = false;
 
 $( window ).load(function() { 
 
@@ -7,6 +8,7 @@ $( window ).load(function() {
 	
 	RemoverItensDuplicados ();
 	LimparDropDownProfissionais();	
+	VerificarAgendamentos();  
 	
 	var profissionalSelecionado = $(".listaProfissionais option:selected").text();
 	$("#ispostback:text").val(profissionalSelecionado);
@@ -16,15 +18,18 @@ $( window ).load(function() {
 		postBack = false
 		CarregarDropDownProfissionais();         
 		
-    });    
+    }); 
+    
+	$(".dataInicioAgendamento .ms-dttimeinput select").change(function(){
+		VerificarAgendamentos()        
+		
+    });   
 });
 
 ExecuteOrDelayUntilScriptLoaded(function() {  
-
-	VerificarAgendamentos();  
-    
-    //checkCookie();
         
+     VerificarAgendamentos() 
+     
     // A função "ExecuteOrDelayUntilScriptLoaded" gera post back
     // Então o valor da variável é alterado para true
     postBack = true
@@ -161,100 +166,76 @@ function LimparDropDownProfissionais () {
 	$(".listaProfissionais select").prepend('<option value="0"> (Nenhum) </option>');
 }
 
-// Gravação de cookies
-function setCookie(cname,cvalue,exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function checkCookie() {
-    var user=getCookie("username");
-    
-    if (user != "") {
-        alert("Welcome again " + user);
-    } 
-    else {
-       user = prompt("Please enter your name:","");
-       if (user != "" && user != null) {
-           setCookie("username", user, 30);
-       }
-    }
-} // Final cookies
-
-
 function VerificarAgendamentos() {
 
 	var ctx1 = new SP.ClientContext.get_current();
 	var web1 = ctx1.get_web();
 	var lists1 = web1.get_lists();
 	ctx1.load(lists1);
-	var list1 = lists1.getByTitle("AgendaSalasdeReuniao");
+	var list1 = lists1.getByTitle("AgendaSalaBemEstar");
 	var camlQuery1 = new SP.CamlQuery();
-	camlQuery1.set_viewXml("<Where><Eq><FieldRef Name='Title' /><Value Type='Text'>teste</Value></Eq></Where>");
-	
+	camlQuery1.set_viewXml("<View></View>");	
 
 	itemCollection1 = list1.getItems(camlQuery1);
 	ctx1.load(itemCollection1);
 
-	ctx1.executeQueryAsync(Function.createDelegate(this,this.onSuccess1),Function.createDelegate(this,this.onFailed));
-	} 
+	ctx1.executeQueryAsync(Function.createDelegate(this, this.onSuccess1),Function.createDelegate(this,this.onFailed));
+} 
 	
-	function onSuccess1(sender, args) {  
-	                                    
-	 if (itemCollection1.get_count() > 0) {
-            var enumerator1 = itemCollection1.getEnumerator();
-            while (enumerator1.moveNext()) {
-                
-                currentListItems1 = enumerator1.get_current();
-                
-                var tituloCategoria = currentListItems1.get_item("Title");
-                		     	
-		        					
+function onSuccess1(sender, args) {  
+                                    
+ if (itemCollection1.get_count() > 0) {
+        var enumerator1 = itemCollection1.getEnumerator();
+        while (enumerator1.moveNext()) {
+            
+            currentListItems1 = enumerator1.get_current();
+                            
+            // Armazena o horário inicial do agendamento já cadastrado na lista
+			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
+            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});;
+            
+            // Armazena o horário final já cadastrado na lista
+			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
+            var horaFim = currentListItems1.get_item("EndDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+            
+            // Verifica se a data de início e fim selecionadas coincidem com algum agendamento já existente na lista 
+            if ($('.dataInicioAgendamento input').val() == currentListItems1.get_item("EventDate").toLocaleDateString() &&
+            	$('.dataFinalAgendamento input').val() == currentListItems1.get_item("EndDate").toLocaleDateString()){
+            	
+            	// Armazena na variável o horário de início selecionado no formulário
+            	// uma variável para o dropDown de horas e outra para os minutos.
+            	var horaInicioSelecionadaDrpDown = $('.dataInicioAgendamento .ms-dttimeinput select').val();
+				var horaInicioSelecionadaDrpDown1 = $('.dataInicioAgendamento .ms-dttimeinput select').eq(1).val();
+									
+				var horaInicioSelecionada =  horaInicioSelecionadaDrpDown + horaInicioSelecionadaDrpDown1;
+				
+				// Armazena na variável o horário de término selecionado no formulário
+            	// uma variável para o dropDown de horas e outra para os minutos.
+            	var horaTerminoSelecionadaDrpDown = $('.dataFinalAgendamento .ms-dttimeinput select').val();
+				var horaTerminoSelecionadaDrpDown1 = $('.dataFinalAgendamento .ms-dttimeinput select').eq(1).val();
+									
+				var horarioTerminoSelecionada =  horaTerminoSelecionadaDrpDown + horaTerminoSelecionadaDrpDown1;
+				
+				// Verifica se para a data selecionada os horários de início e fim coincidem com algum já agendado            	
+            	if (horaInicioSelecionada == horaInicio && horarioTerminoSelecionada == horaFim){
+            			agendamentoDuplicado = true;
+            			return;
+            		}
+            	else
+            		agendamentoDuplicado = false;
             }
-        }	                               
-	}
-	
-	
+        }
+    }	                               
+}
+
 //PreSaveAction code to validate
- function PreSaveAction()
+function PreSaveAction(itemDuplicado)
 {
-    var empNum = $('input[title="Employee Number"]').val();
-    var table = $("#idAttachmentsTable tr");
- 
-    if(empNum < 6 || empNum > 10)
-   {
-      alert('Please provide employee number with digit range 6-10');
-      return false;
+   if (agendamentoDuplicado){
+   		alert ('Já existe uma reserva de agendamento para a mesma data e horário');
+   		return false;
    }
    else
-   {
-   if (table == null || table.length == 0)
-    {      
-        $("#idAttachmentsRow").attr("display",'none');     
-        alert("Please Attach Files");
-        return false ;
-    }
-    else
-    {
-        return true;
-    }
-   }
+   		return true;
+    
 }
