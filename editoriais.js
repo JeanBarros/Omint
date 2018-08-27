@@ -1,13 +1,13 @@
-﻿ExecuteOrDelayUntilScriptLoaded(function () { GetCategorias() }, "SP.js");
+﻿ExecuteOrDelayUntilScriptLoaded(function () { GetEditoriais() }, "SP.js");
 
 
-function GetCategorias() {
+function GetEditoriais() {
 
 	var ctx1 = new SP.ClientContext.get_current();
 	var web1 = ctx1.get_web();
 	var lists1 = web1.get_lists();
 	ctx1.load(lists1);
-	var listCategoria = lists1.getByTitle("Categorias");
+	var listCategoria = lists1.getByTitle("Editoriais");
 	var camlQuery1 = new SP.CamlQuery();
 		
 	itemCollection1 = listCategoria.getItems(camlQuery1);
@@ -23,7 +23,7 @@ function GetCategorias() {
             while (enumerator.moveNext()) {
                 currentListItems = enumerator.get_current();
                 		     	
-		        $("#categorias").append('<li><p><a href=/sitepages/Categorias.aspx?IDCategoria=' 
+		        $("#categorias").append('<li><p><a href=/sitepages/Editoriais.aspx?IDCategoria=' 
 		        + currentListItems.get_item("ID") +'>' + currentListItems.get_item("Title") + '</a></p></li>');		
             }
         }	                               

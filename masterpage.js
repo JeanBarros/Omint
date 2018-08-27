@@ -1,10 +1,8 @@
-ï»¿$(document).ready(function() {
+$(document).ready(function() {
 
     if(getParameterByName("PageView") == "Shared"){
        $("#s4-bodyContainer").css("width","1800px");
     }
-
-ShowHideSubItensMenuLateral();
 
 var currentUser;  
 // Ensure that the SP.js is loaded  
@@ -69,7 +67,7 @@ $(document).keypress(function(e) {
 
 
 
-// FUNCÃ•ES ÃšTIL
+// FUNCÕES ÚTIL
 
 function getParameterByName(name) {
    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -116,16 +114,29 @@ function OnGetListItemFailure(sender, args) {
     console.log('Error:' + args.get_message());
 }
 
-/* Oculta ou Exibe subitens no menu lateral - Jean Barros 18/07/18*/
-function ShowHideSubItensMenuLateral(){
+$(document).ready(function(){
+	
+	/* Oculta ou Exibe subitens no menu lateral - Jean Barros 27/08/18*/
 	var textoMenu = $("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").text(); 
 	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").html(textoMenu + '&nbsp;&nbsp;');
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").append('<span class="fa fa-angle-double-down"></span>');
+	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").append('<span class="fa fa-angle-double-right"></span>');
 	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("cursor", "pointer");
+	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("color", "#003763");
 	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li ul").css("display", "none");
 	
 	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").click(function(){ 		
-		$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li ul").toggle(); 
-	});    
-}
+		$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li ul").toggle();
+		
+		if($("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").hasClass('fa-angle-double-right')){
+			
+			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").removeClass("fa fa-angle-double-right");
+			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").addClass("fa fa-angle-double-down");
+		}
+		else if($("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").hasClass('fa-angle-double-down')){
+			
+			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").removeClass("fa fa-angle-double-down");
+			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").addClass("fa fa-angle-double-right");
+		}
+	});
+});
 
