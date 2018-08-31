@@ -67,7 +67,7 @@ $(document).keypress(function(e) {
 
 
 
-// FUNCÕES ÚTIL
+// FUNCï¿½ES ï¿½TIL
 
 function getParameterByName(name) {
    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -116,26 +116,25 @@ function OnGetListItemFailure(sender, args) {
 
 $(document).ready(function(){
 	
-	/* Oculta ou Exibe subitens no menu lateral - Jean Barros 27/08/18*/
-	var textoMenu = $("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").text(); 
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").html(textoMenu + '&nbsp;&nbsp;');
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").append('<span class="fa fa-angle-double-right"></span>');
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("cursor", "pointer");
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("color", "#003763");
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li ul").css("display", "none");
+    // Oculta ou Exibe subitens no menu lateral - Jean Barros 31/08/18
+    // Adiciona as classes do fontawesome.com para exibir os icones de setas
+	$(".ms-core-listMenu-root li span span .menu-item-text").append('&nbsp;<span class="fa fa-angle-double-right"></span>');
+	$(".ms-core-listMenu-root li span span .menu-item-text").css("cursor", "pointer");
+	$(".ms-core-listMenu-root li span span .menu-item-text").css("color", "#003763");
+	$(".ms-core-listMenu-root li ul").css("display", "none");
 	
-	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").click(function(){ 		
-		$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li ul").toggle();
+	$(".ms-core-listMenu-root li span span .menu-item-text").click(function(){ 		
+		$(".ms-core-listMenu-root li ul").toggle();
 		
-		if($("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").hasClass('fa-angle-double-right')){
+		if($(".ms-core-listMenu-root li span span .menu-item-text span").hasClass('fa-angle-double-right')){
 			
-			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").removeClass("fa fa-angle-double-right");
-			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").addClass("fa fa-angle-double-down");
+			$(".ms-core-listMenu-root li span span .menu-item-text span").removeClass("fa fa-angle-double-right");
+			$(".ms-core-listMenu-root li span span .menu-item-text span").addClass("fa fa-angle-double-down");
 		}
-		else if($("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").hasClass('fa-angle-double-down')){
+		else if($(".ms-core-listMenu-root li span span .menu-item-text span").hasClass('fa-angle-double-down')){
 			
-			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").removeClass("fa fa-angle-double-down");
-			$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text span").addClass("fa fa-angle-double-right");
+			$(".ms-core-listMenu-root li span span .menu-item-text span").removeClass("fa fa-angle-double-down");
+			$(".ms-core-listMenu-root li span span .menu-item-text span").addClass("fa fa-angle-double-right");
 		}
 	});
 });
