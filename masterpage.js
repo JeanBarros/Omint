@@ -114,28 +114,47 @@ function OnGetListItemFailure(sender, args) {
     console.log('Error:' + args.get_message());
 }
 
-$(document).ready(function(){
-	
-    // Oculta ou Exibe subitens no menu lateral - Jean Barros 31/08/18
+// Jean Barros 19/09/18
+$(document).ready(function(){	
+    
     // Adiciona as classes do fontawesome.com para exibir os icones de setas
 	$(".ms-core-listMenu-root li span span .menu-item-text").append('&nbsp;<span class="fa fa-angle-double-right"></span>');
 	$(".ms-core-listMenu-root li span span .menu-item-text").css("cursor", "pointer");
 	$(".ms-core-listMenu-root li span span .menu-item-text").css("color", "#003763");
 	$(".ms-core-listMenu-root li ul").css("display", "none");
-	
-	$(".ms-core-listMenu-root li span span .menu-item-text").click(function(){ 		
-		$(".ms-core-listMenu-root li ul").toggle();
-		
-		if($(".ms-core-listMenu-root li span span .menu-item-text span").hasClass('fa-angle-double-right')){
-			
-			$(".ms-core-listMenu-root li span span .menu-item-text span").removeClass("fa fa-angle-double-right");
-			$(".ms-core-listMenu-root li span span .menu-item-text span").addClass("fa fa-angle-double-down");
-		}
-		else if($(".ms-core-listMenu-root li span span .menu-item-text span").hasClass('fa-angle-double-down')){
-			
-			$(".ms-core-listMenu-root li span span .menu-item-text span").removeClass("fa fa-angle-double-down");
-			$(".ms-core-listMenu-root li span span .menu-item-text span").addClass("fa fa-angle-double-right");
-		}
-	});
-});
+    
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, de acordo com o indíce do elemento li
+    $(".ms-core-listMenu-root li span span .menu-item-text").eq(0).click(function(){ 
+        ShowHideSubmenu(0, 1, 2, 1)        
+    });
+    
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, de acordo com o indíce do elemento li
+    $(".ms-core-listMenu-root li span span .menu-item-text").eq(1).click(function(){
+        ShowHideSubmenu(1, 2, 1, 0)
+    });    
+    
+    function ShowHideSubmenu(menuItemIndex, subItensIndex, subItensOcultos, menuItemRecolhido){
 
+        // Oculta os demais subitens que estiverem expandidos e alterna o icone do menu para indicar o estado de recolhido (>>)
+        $(".ms-core-listMenu-root li ul").eq(subItensOcultos).hide();
+        $(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemRecolhido).removeClass("fa fa-angle-double-down");
+        $(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemRecolhido).addClass("fa fa-angle-double-right");
+        
+        // Alterna o incone de seta para baixo ou para a direita conforme o estado do elemento,
+        // de acordo com o indíce do elemento li passado como argumento
+        if($(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).hasClass('fa-angle-double-right')){
+			
+			$(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).removeClass("fa fa-angle-double-right");
+            $(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).addClass("fa fa-angle-double-down");
+            // Exibe subitens específicos no menu lateral, de acordo com o indíce do elemento li passado como argumento
+            $(".ms-core-listMenu-root li ul").eq(subItensIndex).show(); 
+		}
+		else if($(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).hasClass('fa-angle-double-down')){
+			
+			$(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).removeClass("fa fa-angle-double-down");
+            $(".ms-core-listMenu-root li span span .menu-item-text span").eq(menuItemIndex).addClass("fa fa-angle-double-right");
+            // Oculta subitens específicos no menu lateral, de acordo com o indíce do elemento li passado como argumento
+            $(".ms-core-listMenu-root li ul").eq(subItensIndex).hide(); 
+        }        
+    }
+});
