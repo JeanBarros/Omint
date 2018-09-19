@@ -71,7 +71,7 @@ if (itemCollection.get_count() > 0) {
 			$('#tabs ul').append('<li><a href="#tabs-' + contNome + '">' + currentListItems.get_item("Title") + '</a></li>');	
 			
 			$('#conteudoAba').append('<div id="tabs-' + contNome + '">' + '<table style="width: 885px" cellspacing="0" cellpadding="5" border="0">'
-			+'<tr><td style="width:180px"><img src=' + currentListItems.get_item("Foto").$1_1 + '>' + '</td>'
+			+'<tr><td style="width:180px"><img width="130 px" src=' + currentListItems.get_item("Foto").$1_1 + '>' + '</td>'
 			+'<td id="funcao" style="font-weight:bold">' + currentListItems.get_item("Fun_x00e7__x00e3_o") + '</td></tr>'
 			+'<tr><td style="border-bottom: solid 1px #9bcde6">Serviços</td>'
 			+'<td style="background-color:#9bcde6; border-bottom: solid 1px #ffffff">' + currentListItems.get_item("Servi_x00e7_os") + '</td></tr>'
@@ -171,7 +171,7 @@ function onSuccess1(sender, args) {
                             
             // Armazena o horário inicial do agendamento já cadastrado na lista
 			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
-            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});;
+            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
             
             // Armazena o horário final já cadastrado na lista
 			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)

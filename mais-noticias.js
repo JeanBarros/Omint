@@ -9,8 +9,7 @@ function GetNoticias() {
 	ctx.load(lists);
 	var list = lists.getByTitle("Noticias");
 	var camlQuery = new SP.CamlQuery();
-	camlQuery.set_viewXml("<View><Query><OrderBy><FieldRef Name='Created' Ascending='False' /></OrderBy></Query><RowLimit>5</RowLimit></View>");
-	
+	camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Habilitada' /><Value Type='Boolean'>1</Value></Eq></Where><OrderBy><FieldRef Name='Created' Ascending='False' /></OrderBy></Query></View>");
 
 	itemCollection = list.getItems(camlQuery);
 	ctx.load(itemCollection);
@@ -25,14 +24,13 @@ function GetNoticias() {
                 currentListItems = enumerator.get_current();
                 
                 var tituloCategoria = currentListItems.get_item("Categoria");
-                		     	
-		        $("#maisNoticias").append('<li>' + tituloCategoria.$5h_1  
-		        +  '<p><a href=/Paginas/Noticia.aspx?IDNoticia=' 
-		        + currentListItems.get_item("ID") +'>' + currentListItems.get_item("Title").substring(0, 30) + '...' + '</a></p></li>');			        
+				var thumbNoticia = currentListItems.get_item("ImagemMiniatura");
+									
+				$(".imagemNoticia").append('<div><img src=' + thumbNoticia.$2_1 + '></div>');
 				
-				var thumbNoticia = currentListItems.get_item("ImagemMiniatura");					
-				$("#imagemNoticia").append('<img src=' + thumbNoticia.$2_1 + '><br/>');
-				$("#imagemNoticia").children().css({"margin-bottom": "10px"});					
+				$(".resumoNoticia").append('<div><span>' + tituloCategoria.$5n_1  
+		        +  '</span><p><a href=/Paginas/Noticia.aspx?IDNoticia=' 
+		        + currentListItems.get_item("ID") +'>' + currentListItems.get_item("Title") + '</a></p></div>');						
             }
         }	                               
 	}

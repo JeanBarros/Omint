@@ -125,7 +125,7 @@ function onSuccess1(sender, args) {
 	            {	            
 		            // Armazena o horário inicial do agendamento já cadastrado na lista
 					// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
-		            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});;
+		            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
 		            
 		            // Armazena o horário final já cadastrado na lista
 					// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
