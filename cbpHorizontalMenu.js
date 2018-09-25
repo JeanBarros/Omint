@@ -49,6 +49,11 @@ var cbpHorizontalMenu = (function() {
        close();         
     });
     
+	$("ul.ulmenusup")
+       .mouseleave(function() {
+       close();         
+    });
+    
 
 
 

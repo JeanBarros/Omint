@@ -59,7 +59,7 @@ function onQuerySuccess() {
  
         var peopleManager = new SP.UserProfiles.PeopleManager(clientContext);
  
-        var profilePropertyNames = ["PreferredName", "PictureURL", "SPS-Birthday", "PreferredName"];
+        var profilePropertyNames = ["PreferredName", "PictureURL", "SPS-Birthday", "SPS-ResourceSID"];
  
         for (var i = 0; i < users.length; i++) {
             var userProfilePropertiesForUser = new SP.UserProfiles.UserProfilePropertiesForUser(clientContext, users[i], profilePropertyNames);

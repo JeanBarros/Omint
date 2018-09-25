@@ -25,12 +25,11 @@ function GetNoticias() {
                 
                 var tituloCategoria = currentListItems.get_item("Categoria");
 				var thumbNoticia = currentListItems.get_item("ImagemMiniatura");
-									
-				$(".imagemNoticia").append('<div><img src=' + thumbNoticia.$2_1 + '></div>');
 				
-				$(".resumoNoticia").append('<div><span>' + tituloCategoria.$5n_1  
-		        +  '</span><p><a href=/Paginas/Noticia.aspx?IDNoticia=' 
-		        + currentListItems.get_item("ID") +'>' + currentListItems.get_item("Title").substring(0, 77) + '...' + '</a></p></div>');						
+				$(".box-noticias-home").append("<div class='resumoNoticia'><a href=/Paginas/Noticia.aspx?IDNoticia=" + currentListItems.get_item("ID") +'>' 
+				+ '<img class="imagemNoticia" src="' + thumbNoticia.$2_1 + '">'
+				+ '<div class="itemBox"><span>' + tituloCategoria.$5n_1 + '</span><p>' 
+				+ currentListItems.get_item("Title") + '</p></div></a></div>');
             }
         }	                               
 	}

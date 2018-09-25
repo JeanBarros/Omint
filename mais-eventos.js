@@ -11,7 +11,7 @@ function GetEventos() {
 	ctxEvnts.load(listsEvnts);
 	var listEvnts = listsEvnts.getByTitle("Agenda");
 	var camlQueryEvnts = new SP.CamlQuery();
-	camlQueryEvnts.set_viewXml("<View><Query><Where><Geq><FieldRef Name='EventDate' /><Value IncludeTimeValue='TRUE' Type='DateTime'>" + dataCorrente.toISOString() + "</Value></Geq></Where><OrderBy><FieldRef Name='Created' Ascending='True' /></OrderBy></Query><RowLimit>3</RowLimit></View>");
+	camlQueryEvnts.set_viewXml("<View><Query><Where><Geq><FieldRef Name='EventDate' /><Value IncludeTimeValue='TRUE' Type='DateTime'>" + dataCorrente.toISOString() + "</Value></Geq></Where><OrderBy><FieldRef Name='Created' Ascending='false' /></OrderBy></Query></View>");
 
 	itemCollectionEvnts = listEvnts.getItems(camlQueryEvnts);
 	ctxEvnts.load(itemCollectionEvnts);
@@ -35,12 +35,12 @@ function GetEventos() {
                 var horaInicio = currentListItems.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
                 var horaFim = currentListItems.get_item("EndDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}); 
 									
-				$(".resumoEvento").append('<div><a href=/Lists/Agenda/DispForm.aspx?ID=' 
-		        + currentListItems.get_item("ID") + '&ContentTypeId=0x01020050DB1FA5989659489EDA6065F847A61B' +'><span>' + titulo + '</span>'
+                $(".resumoEvento").append('<div><a href=/Lists/Agenda/DispForm.aspx?ID=' + currentListItems.get_item("ID") 
+                + '&ContentTypeId=0x01020050DB1FA5989659489EDA6065F847A61B><span>' + titulo + '</span>'
 				+ '<p>Local: ' + local
 				+ '<br> De: ' + dataInicio + ' até ' + dataFim
-				+ '<br> Horário: ' + horaInicio + ' às ' + horaFim
-		        + '</p></a></div>');						
+				+ '<br> Horário: ' + horaInicio + ' às ' + horaFim + '</p>'
+		        + '</a></div>');
             }
         }	                               
 	}

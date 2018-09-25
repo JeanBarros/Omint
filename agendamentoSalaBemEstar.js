@@ -2,6 +2,12 @@
 
 
 $( window ).load(function() { 
+	var name = $("#userTitle").text();
+	$("#txtsolicitante input").attr("value",name);
+	$("#txtlocal input").attr("value","Sala Bem Estar");
+	$("#txtlocal input").attr("disabled","disabled");
+	$("#txtsolicitante input").attr("disabled","disabled");
+
 	
 	var profissionalSelecionado = $(".listaProfissionais option:selected").text();
 	    
