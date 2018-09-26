@@ -29,6 +29,7 @@ ExecuteOrDelayUntilScriptLoaded(function() {
         
      VerificarAgendamentos()     
      CarregarAbasProfissionais();
+     ConsultarRamalColaborador();
                 
 }, "SP.js");
 
@@ -45,12 +46,31 @@ function ConsultarRamalColaborador() {
 	//camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='ID' /><Value Type='Counter'>" + idProfissional + "</Value></Eq></Where></Query></View>");	
 	camlQuery.set_viewXml("<View></View>");
 
-	itemCollection = list.getItems(camlQuery);
-	ctxcolaborador.load(itemCollection);
+	itemCollectioncolaborador = list.getItems(camlQuery);
+	ctxcolaborador.load(itemCollectioncolaborador);
 
-	ctxcolaborador.executeQueryAsync(Function.createDelegate(this,this.onSuccess),Function.createDelegate(this,this.onFailed));
+	ctxcolaborador.executeQueryAsync(Function.createDelegate(this,this.onSuccess1),Function.createDelegate(this,this.onFailed));
 }
 
+
+function onSuccess1(sender, args) 
+	{  
+	                                    
+	 if (itemCollectioncolaborador.get_count() > 0) 
+	 {
+            var enumeratorcolaborador = itemCollectioncolaborador.getEnumerator();
+            while (enumeratorcolaborador.moveNext()) 
+            {
+                currentListItemscolaborador = enumeratorcolaborador.get_current();
+                
+                var titulo = currentListItems.get_item("Title");
+                /*var email = currentListItems.get_item("email");
+                var aniver = currentListItems.get_item("dia") + "/" + currentListItems.get_item("mes"); */
+                
+                
+            }
+        }	                               
+	}
 
 // Manipula as informações sobre as funções disponíveis
 // Os dados são recuperados da lista "Profissionais BemEstar" através da CamlQuery
