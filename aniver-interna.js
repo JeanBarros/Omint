@@ -44,21 +44,22 @@ function GetAniver() {
                 
                 var loginName = email.match(/^([^@]*)@/)[1]; 
 				var url = "https://omintbr-my.sharepoint.com:443/Person.aspx?accountname=i%3A0%23%2Ef%7Cmembership%7C"+email;
-				var imagem = "https://omintbr-my.sharepoint.com:443/User%20Photos/Imagens%20de%20Perfil/"+loginName+"_omint_com_br_MThumb.jpg";
+				var imagem = "https://omintbr-my.sharepoint.com:443/User%20Photos/Imagens%20de%20Perfil/"+loginName
+				+"_omint_com_br_MThumb.jpg";
 				//var imagem = "https://omintbr.sharepoint.com/SiteAssets/people.jpg";
-				
-				
                 
-					$("#aniversariantes").append("<div class='aniverhome'><a href='"+url+"'><img onerror='this.src=\"https://omintbr.sharepoint.com/SiteAssets/people.jpg\";' width=80 align=left class='imgprf' src='"+imagem+"'/>" + titulo + "<br/>" + aniver + "<br/>Dar parabéns!</a></div>");
-	
-				
+				$(".box-aniversariantes-interna").append("<div class='aniversariantesInterna'><a href=" + url + " >" 
+				+ "<img onerror='this.src=\"https://omintbr.sharepoint.com/SiteAssets/people.jpg\";'"
+				+ "class='imagemColaborador' src='"+imagem+"'/>" 
+				+ "<div class='nomeColaborador'>" + titulo + '</div>' +  "<div class='dataAniversario'>" 
+				+ aniver + "<br> Dar parabéns!</div></a></div>");
             }
         }	                               
 	}
-	    function onFailed(sender, args) 
-	    {
-	        console.log("Something went Wrong: ");
-	} 
+
+function onFailed(sender, args){
+	console.log("Something went Wrong: ");
+} 
 	
 		  
 	

@@ -34,6 +34,26 @@ ExecuteOrDelayUntilScriptLoaded(function() {
 
 // Manipula as informações sobre as funções disponíveis
 // Os dados são recuperados da lista "Profissionais BemEstar" através da CamlQuery
+function ConsultarRamalColaborador() {	
+
+	var ctxcolaborador = new SP.ClientContext.get_current();
+	var webcol = ctxcolaborador.get_web();
+	var listscol = webcol.get_lists();
+	ctxcolaborador.load(listscol);
+	var list = listscol.getByTitle("Colaboradores");
+	var camlQuery = new SP.CamlQuery();
+	//camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='ID' /><Value Type='Counter'>" + idProfissional + "</Value></Eq></Where></Query></View>");	
+	camlQuery.set_viewXml("<View></View>");
+
+	itemCollection = list.getItems(camlQuery);
+	ctxcolaborador.load(itemCollection);
+
+	ctxcolaborador.executeQueryAsync(Function.createDelegate(this,this.onSuccess),Function.createDelegate(this,this.onFailed));
+}
+
+
+// Manipula as informações sobre as funções disponíveis
+// Os dados são recuperados da lista "Profissionais BemEstar" através da CamlQuery
 function CarregarAbasProfissionais() {	
 
 	var ctx = new SP.ClientContext.get_current();
