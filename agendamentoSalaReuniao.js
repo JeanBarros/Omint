@@ -109,7 +109,7 @@ function onSuccess1(sender, args) {
             
             // Verifica se a sala de reunião selecionada já está agendada
             // Em caso postivo continua com o restante das verificações
-            if($(".sala option:selected").text() == currentListItems1.get_item("sala").$5n_1){
+            if($(".sala option:selected").text() == currentListItems1.get_item("sala").get_lookupValue()){
                             
 	            // Verifica se é uma atividade diária, que não inicia ou termina em uma hora específica.
 	            if ($('.dataInicioAgendamento .ms-dttimeinput select').length == 0 && 
@@ -155,7 +155,7 @@ function onSuccess1(sender, args) {
 		            		tipoDeConflito = 0;           			
 		            		return;
 		            	}            		
-		            	else if (horaInicioSelecionada <= horaInicio && horaTerminoSelecionada >= horaInicio){
+		            	else if (horaInicioSelecionada <= horaInicio && horaTerminoSelecionada >= horaFim){
 		            		agendamentoConflitante = true; 	
 		            		tipoDeConflito = 0;            		            		
 		            		return;

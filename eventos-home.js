@@ -35,12 +35,12 @@ function GetEventos() {
                 var horaInicio = currentListItems.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
                 var horaFim = currentListItems.get_item("EndDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}); 
 									
-				$(".resumoEvento").append('<div><a href=/Lists/Agenda/DispForm.aspx?ID=' 
+				$(".box-eventos-home").append("<div class='resumoEvento'><a href=/Lists/Agenda/DispForm.aspx?ID=" 
 		        + currentListItems.get_item("ID") + '&ContentTypeId=0x01020050DB1FA5989659489EDA6065F847A61B' +'><span>' + titulo + '</span>'
 				+ '<p>Local: ' + local
 				+ '<br> De: ' + dataInicio + ' até ' + dataFim
 				+ '<br> Horário: ' + horaInicio + ' às ' + horaFim
-		        + '</p></a></div>');						
+				+ '</p></a></div>');
             }
         }	                               
 	}

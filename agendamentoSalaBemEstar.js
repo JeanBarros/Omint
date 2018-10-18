@@ -1,13 +1,13 @@
 ﻿var agendamentoConflitante = false;
+var currentUser;
+var nomeUsuarioLogado;
+var emailUsuarioLogado;
 
-
+// Executa depois que a página está totalmente carregada
 $( window ).load(function() { 
-	var name = $("#userTitle").text();
-	$("#txtsolicitante input").attr("value",name);
+	
 	$("#txtlocal input").attr("value","Sala Bem Estar");
-	$("#txtlocal input").attr("disabled","disabled");
-	$("#txtsolicitante input").attr("disabled","disabled");
-
+	$("#txtlocal input").attr('readonly', true);
 	
 	var profissionalSelecionado = $(".listaProfissionais option:selected").text();
 	    
@@ -22,16 +22,44 @@ $( window ).load(function() {
 	$(".dataFinalAgendamento .ms-dttimeinput select").change(function(){
 		VerificarAgendamentos()  
     });
+    
+    // Chama o método depois de carregar o perfil do usuário logado
+    ConsultarRamalColaborador();
      
 });
 
+// Executa igual o "(document).ready()"
 ExecuteOrDelayUntilScriptLoaded(function() { 
         
      VerificarAgendamentos()     
      CarregarAbasProfissionais();
-     ConsultarRamalColaborador();
+     ObterUsuarioLogado();          
                 
 }, "SP.js");
+
+// Obtém o usuario logado
+function ObterUsuarioLogado(){
+
+	var contextUser = new SP.ClientContext.get_current();  
+    var webUser = contextUser.get_web();  
+    currentUser = webUser.get_currentUser();  
+    contextUser.load(currentUser); 
+       
+    contextUser.executeQueryAsync(onSuccessMethod, onRequestFail);    
+}
+
+function onSuccessMethod(sender, args) {  
+    
+  	nomeUsuarioLogado = currentUser.get_title();
+  	emailUsuarioLogado = currentUser.get_email();
+  		
+	return emailUsuarioLogado    
+}  
+  
+// This function runs if the executeQueryAsync call fails.  
+function onRequestFail(sender, args) {  
+	console.log("Algo deu errado");  
+}
 
 // Manipula as informações sobre as funções disponíveis
 // Os dados são recuperados da lista "Profissionais BemEstar" através da CamlQuery
@@ -41,36 +69,49 @@ function ConsultarRamalColaborador() {
 	var webcol = ctxcolaborador.get_web();
 	var listscol = webcol.get_lists();
 	ctxcolaborador.load(listscol);
-	var list = listscol.getByTitle("Colaboradores");
-	var camlQuery = new SP.CamlQuery();
-	//camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='ID' /><Value Type='Counter'>" + idProfissional + "</Value></Eq></Where></Query></View>");	
-	camlQuery.set_viewXml("<View></View>");
+  	
+	var listcol = listscol.getByTitle("Colaboradores");
+	var camlQueryCol = new SP.CamlQuery();
+	
+	if(emailUsuarioLogado != "")
+	camlQueryCol.set_viewXml("<View><Query><Where><Eq><FieldRef Name='email' /><Value Type='Text'>" + emailUsuarioLogado + "</Value></Eq></Where></Query></View>");
+	else 
+	{
+	    $("#txtsolicitante input").attr("value",nomeUsuarioLogado);	    
+		$("#txtsolicitante input").attr('readonly', true);
+		
+		return
+	}
 
-	itemCollectioncolaborador = list.getItems(camlQuery);
+	itemCollectioncolaborador = listcol.getItems(camlQueryCol);
 	ctxcolaborador.load(itemCollectioncolaborador);
 
-	ctxcolaborador.executeQueryAsync(Function.createDelegate(this,this.onSuccess1),Function.createDelegate(this,this.onFailed));
+	ctxcolaborador.executeQueryAsync(Function.createDelegate(this,this.onSuccess2),Function.createDelegate(this,this.onFailed));
 }
 
-
-function onSuccess1(sender, args) 
-	{  
+function onSuccess2(sender, args) {  
 	                                    
-	 if (itemCollectioncolaborador.get_count() > 0) 
-	 {
-            var enumeratorcolaborador = itemCollectioncolaborador.getEnumerator();
-            while (enumeratorcolaborador.moveNext()) 
-            {
-                currentListItemscolaborador = enumeratorcolaborador.get_current();
-                
-                var titulo = currentListItems.get_item("Title");
-                /*var email = currentListItems.get_item("email");
-                var aniver = currentListItems.get_item("dia") + "/" + currentListItems.get_item("mes"); */
-                
-                
-            }
-        }	                               
-	}
+	if (itemCollectioncolaborador.get_count() > 0) 
+	{
+	    var enumeratorcolaborador = itemCollectioncolaborador.getEnumerator();
+	    var ramal;
+	    
+	    while (enumeratorcolaborador.moveNext()) 
+	    {
+	        currentListItemscolaborador = enumeratorcolaborador.get_current();
+	        
+	        ramal = currentListItemscolaborador.get_item("ramal");
+	    }
+	    
+	    if(ramal != null)	    		    		    
+	    	$("#txtsolicitante input").attr("value",(nomeUsuarioLogado + " - Ramal: " + ramal)); 	    	    
+		else 
+		{
+		    $("#txtsolicitante input").attr("value",nomeUsuarioLogado);	    
+			$("#txtsolicitante input").attr("disabled","disabled");
+		}
+	}	                               
+}
 
 // Manipula as informações sobre as funções disponíveis
 // Os dados são recuperados da lista "Profissionais BemEstar" através da CamlQuery
@@ -82,8 +123,7 @@ function CarregarAbasProfissionais() {
 	ctx.load(lists);
 	var list = lists.getByTitle("Profissionais BemEstar");
 	var camlQuery = new SP.CamlQuery();
-	//camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='ID' /><Value Type='Counter'>" + idProfissional + "</Value></Eq></Where></Query></View>");	
-	camlQuery.set_viewXml("<View></View>");
+	camlQuery.set_viewXml("<View><Query><OrderBy><FieldRef Name='diaDaSemana' Ascending='True' /></OrderBy></Query></View>");
 
 	itemCollection = list.getItems(camlQuery);
 	ctx.load(itemCollection);
@@ -188,7 +228,7 @@ if (itemCollection.get_count() > 0) {
 } // Final
 	    
 function onFailed(sender, args) {
-        console.log("Algo deu errado");
+	console.log("Algo deu errado");
 }
 
 function VerificarAgendamentos() {
@@ -351,8 +391,9 @@ $(function() {
       
 });
 
+// Executa assim que o documento (arquivo) é criado/atualizado em memória (antes de ser carregado no navegador)
 $(document).ready(function(){
-
+	
     $(".ui-datepicker-trigger").click(function(){
 		// Envia como argumento os dias da semana atendidos pelo profissional
 		DatasDiponiveis(diasDeAtendimento); 

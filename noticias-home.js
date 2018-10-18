@@ -23,12 +23,12 @@ function GetNoticias() {
             while (enumerator.moveNext()) {
                 currentListItems = enumerator.get_current();
                 
-                var tituloCategoria = currentListItems.get_item("Categoria");
+                var tituloCategoria = currentListItems.get_item("Categoria").get_lookupValue();
 				var thumbNoticia = currentListItems.get_item("ImagemMiniatura");
 				
 				$(".box-noticias-home").append("<div class='resumoNoticia'><a href=/Paginas/Noticia.aspx?IDNoticia=" + currentListItems.get_item("ID") +'>' 
 				+ '<img class="imagemNoticia" src="' + thumbNoticia.$2_1 + '">'
-				+ '<div class="itemBox"><span>' + tituloCategoria.$5n_1 + '</span><p>' 
+				+ '<div><span>' + tituloCategoria + '</span><p>' 
 				+ currentListItems.get_item("Title") + '</p></div></a></div>');
             }
         }	                               

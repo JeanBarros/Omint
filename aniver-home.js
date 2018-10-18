@@ -47,10 +47,10 @@ function GetAniver() {
 				var imagem = "https://omintbr-my.sharepoint.com:443/User%20Photos/Imagens%20de%20Perfil/"+loginName+"_omint_com_br_MThumb.jpg";
 				//var imagem = "https://omintbr.sharepoint.com/SiteAssets/people.jpg";				
                 
-				$(".aniversariantes").append("<div class='aniverhome'><a href=" + url + " >" 
+				$(".box-aniversariantes-home").append("<div class='resumoAniversario'><a href=" + url + " >" 
 				+ "<img onerror='this.src=\"https://omintbr.sharepoint.com/SiteAssets/people.jpg\";'"
 				+ "class='imagemColaborador' src='"+imagem+"'/>" 
-				+ "<div class='nomeColaborador'>" + titulo + '</div>' +  "<div class='dataAniversario'>" + aniver + "<br> Dar parabéns!</a></div></div>");				
+				+ "<div class='nomeColaborador'>" + titulo + '</div>' +  "<div class='dataAniversario'>" + aniver + "<br> Dar parabéns!</div></a></div>");	
             }
 		}
 	}
@@ -58,6 +58,8 @@ function GetAniver() {
 	    {
 	        console.log("Something went Wrong: ");
 	} 
+	
+	
 	
 		  
 	

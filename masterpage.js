@@ -114,24 +114,89 @@ function OnGetListItemFailure(sender, args) {
     console.log('Error:' + args.get_message());
 }
 
-// Jean Barros 19/09/18
 $(document).ready(function(){	
     
+    // Menu lateral - Jean Barros 03/10/18
+
     // Adiciona as classes do fontawesome.com para exibir os icones de setas
-	$(".ms-core-listMenu-root li span span .menu-item-text").append('&nbsp;<span class="fa fa-angle-double-right"></span>');
-	$(".ms-core-listMenu-root li span span .menu-item-text").css("cursor", "pointer");
-	$(".ms-core-listMenu-root li span span .menu-item-text").css("color", "#003763");
-	$(".ms-core-listMenu-root li ul").css("display", "none");
+	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").append('&nbsp;<span class="fa fa-angle-double-right"></span>');
+	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("cursor", "pointer");
+	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("color", "#003763");
+    $(".ms-core-listMenu-root li ul").css("display", "none");
     
-    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, de acordo com o indíce do elemento li
-    $(".ms-core-listMenu-root li span span .menu-item-text").eq(0).click(function(){ 
-        ShowHideSubmenu(0, 1, 2, 1)        
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+   $("#zz11_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
+        // Verifica se o menu lateral é de um subsite - Alguns implementa o evento "onclilck" na div
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))            
+            ShowHideSubmenu(0, 2, 3, 1)        
+        else
+            ShowHideSubmenu(0, 1, 2, 1)
     });
     
-    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, de acordo com o indíce do elemento li
-    $(".ms-core-listMenu-root li span span .menu-item-text").eq(1).click(function(){
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+   $("#zz11_V4QuickLaunchMenu li span span .menu-item-text").eq(1).click(function(){
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))
+            ShowHideSubmenu(1, 3, 2, 0)
+        else
+            ShowHideSubmenu(1, 2, 1, 0)            
+    });
+
+    // subsite 1
+    $("#zz12_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
+        // Verifica se o menu lateral é de um subsite - Alguns implementa o evento "onclilck" na div
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))            
+        ShowHideSubmenu(0, 1, 2, 1)
+        
+        else
+        ShowHideSubmenu(0, 2, 3, 1)            
+    });
+    
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+   $("#zz12_V4QuickLaunchMenu li span span .menu-item-text").eq(1).click(function(){
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))
         ShowHideSubmenu(1, 2, 1, 0)
-    });    
+        else
+        ShowHideSubmenu(1, 3, 2, 0)
+                        
+    });
+
+    // subsite 2
+
+    $("#zz14_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
+        // Verifica se o menu lateral é de um subsite - Alguns implementa o evento "onclilck" na div
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))            
+        ShowHideSubmenu(0, 2, 3, 1)            
+        
+        else
+        ShowHideSubmenu(0, 1, 2, 1)
+        
+    });
+    
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+   $("#zz14_V4QuickLaunchMenu li span span .menu-item-text").eq(1).click(function(){
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))
+        ShowHideSubmenu(1, 3, 2, 0)
+        
+        else
+        ShowHideSubmenu(1, 2, 1, 0)
+        
+                        
+    });
+    
+    //Específico para os submenus que aparecem quando estiver navegando nas páginas de configurações do SharePoint 
+        /*$("#zz12_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
+            // Verifica se o menu lateral é de um subsite - Alguns implementa o evento "onclilck" na div
+            ShowHideSubmenu(0, 2, 3, 1)                                   
+        });
+        
+        $("#zz12_V4QuickLaunchMenu li span span .menu-item-text").eq(1).click(function(){
+            ShowHideSubmenu(1, 3, 2, 0)
+        });*/
+    // Final
     
     function ShowHideSubmenu(menuItemIndex, subItensIndex, subItensOcultos, menuItemRecolhido){
 
@@ -157,4 +222,26 @@ $(document).ready(function(){
             $(".ms-core-listMenu-root li ul").eq(subItensIndex).hide(); 
         }        
     }
+    // Final
+
+    // Modal - Jean Barros 03/10/18
+    //$('#zz11_RootAspMenu li a').eq(3)
+    $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').removeAttr("href");
+    $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').css("cursor", "pointer")
+            
+    $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').click(function(){					    
+            $( "#dialog-message" ).dialog({			      
+                modal: true,
+                buttons: {
+                Fechar: function() {
+                    $( this ).dialog( "close" );			          
+                }
+                }			      
+            });
+
+            $("#dialog-message").empty();
+            $("#dialog-message").append("<iframe height='400px' width='517px' scrolling='no' src='http://www.omint.com.br/ouvidoria/popup.aspx?_dc=1382127107908' name='iframe_a'></iframe> ");
+            $(".ui-button").eq(0).text("Fechar")			   
+    });
+    // Final
 });

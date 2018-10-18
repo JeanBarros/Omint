@@ -24,14 +24,14 @@ function GetNoticias() {
             while (enumerator.moveNext()) {
                 currentListItems = enumerator.get_current();
                 
-                var tituloCategoria = currentListItems.get_item("Categoria");
+                var tituloCategoria = currentListItems.get_item("Categoria").get_lookupValue();
 				var thumbNoticia = currentListItems.get_item("ImagemMiniatura");
 									
-				$(".imagemNoticia").append('<div><img src=' + thumbNoticia.$2_1 + '></div>');
-				
-				$(".resumoNoticia").append('<div><span>' + tituloCategoria.$5n_1  
-		        +  '</span><p><a href=/Paginas/Noticia.aspx?IDNoticia=' 
-		        + currentListItems.get_item("ID") +'>' + currentListItems.get_item("Title").substring(0, 30) + '...' + '</a></p></div>');				
+				$(".box-noticias-lateral").append("<div class='resumoNoticia'><a href=/Paginas/Noticia.aspx?IDNoticia=" 
+				+ currentListItems.get_item("ID") +' title="' + currentListItems.get_item("Title") + '">' 
+				+ '<img class="imagemNoticia" src="' + thumbNoticia.$2_1 + '">'
+				+ '<div><span>' + tituloCategoria + '</span><p>' 
+				+ currentListItems.get_item("Title") + '</p></div></a></div>');
             }
         }	                               
 	}
