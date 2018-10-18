@@ -1,0 +1,443 @@
+﻿@font-face {
+    font-family: 'Myriad Pro';
+    src: url('../SiteAssets/fonts/MyriadPro.ttf');
+    }
+
+#DeltaPlaceHolderMain .ms-rtestate-field {
+	
+	height: 432px;
+	overflow:hidden;	
+}
+
+.imagem-bem-estar img {
+	
+	position:relative;
+	bottom:90px;
+}
+
+body {
+	font-family:"Myriad Pro" !important;
+	/*background:#e8e8e8 !important;*/
+	background-image:url('/Imagens/bgcenter.jpg') !important;
+	background-position:center !important;
+	background-repeat:repeat-x !important;
+}
+
+.ms-core-overlay {
+    background-color: transparent !important;
+}
+  
+#layoutsTable {
+	margin-top:20px !important;
+}
+
+.ms-siteSettings-root {
+	margin-top:40px
+}
+  
+#DeltaPageStatusBar {
+	display:none;
+}
+
+#DeltaPlaceHolderMain {
+	margin-top:40px !important;
+	margin-left: 20px;
+}
+
+.barraAzul {
+	width:100%;
+	height:60px;
+	background:#62768e;
+	z-index:1000 !important;
+}
+
+ul.ms-linksection-listRoot li.ms-linksection-listItem a:link,ul.ms-linksection-listRoot li.ms-linksection-listItem a, ul.ms-linksection-listRoot li.ms-linksection-listItem a:active {
+	color:#102a46!important;
+}
+.btnbusca {
+cursor:pointer;
+}
+
+.ms-webpart-zone, .ms-fullWidth, .ms-webpart-zone .ms-fullWidth{
+	z-index:1!important;
+}
+
+
+.cbp-hrmenu {
+background-color:#102a46;
+box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+
+}
+
+.cbp-hrmenu > ul > li > a:link, .cbp-hrmenu > ul > li > a, .cbp-hrmenu > ul > li > a:visited{
+	color:#a5b1c1;
+	padding:12px 32px 10px 32px;
+	font-family:"Segoe UI";
+	text-decoration: none;
+}
+
+.cbp-hropen, .cbp-hrsub-inner, .cbp-hrsub {
+	z-index:999!important;
+}
+
+#suiteBarTop {
+	background-color:rgba(0, 55, 119, 1) !important;
+
+}
+
+#currentname {
+	float:right;
+	margin-right:12px;
+	margin-top:10px;
+}
+
+#personinfo {
+	float:right;
+}
+.ms-cui-topBar2 {
+	background-color:#ffffff !important;
+}
+
+.carrosel .ms-webpart-zone {
+    position: relative;
+    right: 25px;
+}
+
+#linha {
+	width:980px;
+}
+
+#pageTitle{
+	display:none !important;
+}
+
+
+#DeltaTopNavigation {
+	display:none !important;
+}
+
+img.ms-siteicon-img {
+	/*width:80px !important;*/
+	/*height:80px !Important;*/
+	max-height:180px !important;
+	margin-top:10px !important;
+	margin-left:10px !important;
+	
+}
+
+#s4-bodyContainer{
+	width:1180px !important;
+	margin:0 auto !important;
+	overflow:hidden !important;
+	background-color:#ffffff !important;
+	z-index:99999 !important;
+	padding-bottom:0!important;
+}
+
+#s4-titlerow {
+	width:1180px !important;
+	 height:165px;
+	 box-shadow: 0px 6px 15px #ccc;
+	 position: absolute;
+	 top:20px;
+	 background-color:#FFFFFF;
+}
+
+#contentBox {    
+    border-left: solid 1px #cccccc;
+    padding-top:20px;
+	padding-bottom:40px;
+}
+
+#contentRow {
+	padding-top: 0;
+}
+
+#DeltaPlaceHolderMain{
+	overflow-x: auto;
+}
+
+.boxBusca {
+	    right: 0px;
+	    Width:400px; 
+	    vertical-align:top;
+	    
+	    }
+
+/* MENU LATERAL */
+
+.ms-core-listMenu-verticalBox {
+	color:#FFFFFF;
+}
+
+.ms-core-sideNavBox-removeLeftMargin {
+	margin-top:16px;
+	margin-left: 0 !important;
+}
+
+.ms-core-listMenu-item{
+	-webkit-transition-duration: 0.7s; /* Safari */
+	transition-duration: 0.7s;
+}
+	
+li > a.ms-core-listMenu-item.ms-core-listMenu-selected:hover, li > a.ms-core-listMenu-item:hover, li > a.ms-core-listMenu-item:active{
+	background-color: #d3cebb !important;
+	border-left: solid 3px #a19062 !important;
+}
+
+.ms-core-listMenu-selected:link, .ms-core-listMenu-selected:visited, .ms-core-listMenu-selected{
+	background-color: #d3cebb !important;
+	border-left: solid 3px #a19062 !important;
+}
+
+.ms-core-listMenu-verticalBox, .ms-core-listMenu-verticalBox a, .ms-core-listMenu-verticalBox a:link, menu-item-text {
+	color:#102a46!important;
+	z-index:10 !important;
+}
+
+.itemBox {
+	color:#102a46;
+	font-family:"Myriad Pro" !important;
+}
+
+.up {
+	margin-top:-10px;
+}
+
+.TituloPagina {
+	margin-left:-20px !important;
+	color:#102a46!important;
+}
+
+.rodape a:link {
+	color:#62778e;
+	text-decoration: none;
+}
+
+.rodape a:hover{
+	color:#ffffff !important;
+}
+
+.rodape a:visited{
+	color:#62778e;
+}
+
+.rodape .col-md-1{
+	padding: 0;
+}
+
+.rodape .col-md-1 img{
+	float: right;
+	width: 70%;
+}
+
+.rodape ul{
+	padding: 0 !important;
+	margin-top: 20px !important;
+}
+
+.tituloBox {
+color:#102a46;
+background-color: #f2f2f2;
+font-size:22px;
+margin-top:10px;
+margin-bottom:20px;
+width:100%;
+/*border-bottom:1px dotted #102a46;*/
+padding:5px 0 5px 5px;
+}
+
+#zz10_MenuQuickLaunch{
+	position: relative;
+	top: 16px;
+}
+
+ul.ms-core-listMenu-root  {
+	background-color: #f2f2f2;
+	padding-left: 0;
+}
+
+ul.ms-core-listMenu-root li {
+	border-top: 2px solid #ffffff;	
+}
+
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item{
+	padding: 10px !important;
+	border-left: solid 3px transparent;
+}
+
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-root > li > .ms-core-listMenu-item:hover{
+	background-color: #d3cebb !important;
+	border-left: solid 3px #a19062 !important;
+}
+
+.rodape {
+	background-color:#102a46;
+	clear:both;
+	color:#a19062;
+	list-style:none;
+	padding-top: 30px;
+}
+	
+.rodapetotal {	
+	margin-right:auto;
+	margin-left:auto;
+	width:1180px;
+	line-height:1.20em;	
+}
+
+div.article{
+	padding:0!important;
+}
+
+.conteudoNoticia {
+	color:#102a46;
+
+}
+
+.TitNoticiaHome,.TitNoticiaHome:active, .TitNoticiaHome:link {
+	 font-size:14px;
+	 color:rgb(119, 119, 119);
+}
+img.imgBusca {
+	padding-top:6px;
+	margin-right:6px
+}
+
+img.imgthumb {
+	width:72px;
+	height:72px;
+}
+
+.vejamais:link,.vejamais:visited  {
+	color:#102a46;
+
+}
+
+#sideNavBox {
+	margin-left: 0px !important;
+    width: 220px;
+	background-color: #f2f2f2;
+	padding-bottom: 20px;
+	margin-top:20px;
+}
+
+#bannersrc img {
+	max-width:940px;
+}
+
+.h6rodape {
+	color:#a19062;
+}
+
+.col-md-11 .h6rodape{
+	font-size: 14px;
+}
+
+.bread{
+height:35px !important;
+max-height:35px !important;
+margin-top:10px !important;
+}
+
+.breadcrumb {
+    padding: 8px;
+	border-radius: 0;
+	color: #62768e;
+	background-color: #f2f2f2;
+}
+
+.breadcrumb a{
+	color: #a5b1c1;
+	text-decoration: none;
+}
+
+.breadcrumb a:hover{
+	color: #62768e;
+}
+
+.noticiaItemHome a, .noticiaItemHome a:active, .noticiaItemHome a:link, .noticiaItemHome a:visited {
+color:#102a46!important;
+}
+
+.box-editoriais .col-md-12 div {
+    width:80px;
+    height: 100px;  
+    margin-right: 10px;
+    overflow:hidden;
+    float:left;
+}
+
+.box-editoriais img {
+    height: 80px;
+}
+
+.box-editoriais .col-md-9{ 
+	padding-left: 0px !important;
+}
+
+.box-editoriais{
+	color:#102a46;
+}
+
+.box-editoriais a{
+	color:#102a46;
+}
+
+.box-editoriais .col-md-12 span{
+	font-weight:bold;
+}
+
+.box-editoriais p{
+	margin-top: 10px;
+    height: 52px;
+    overflow: hidden;
+}
+
+/* Modal */
+#dialog-message{
+	width: 517px !important;
+	height:410px !important;
+	z-index: 9999;
+	position:relative; 
+	background-color:#ffffff;
+	border:solid 1px #cccccc;
+	border-top:none;
+}
+
+.ui-widget.ui-widget-content{
+    text-align: justify;
+    
+}
+
+.ui-dialog-titlebar{
+	width:517px;
+	position: relative;
+    z-index: 9999;
+    height:34px;
+    border:solid 1px #cccccc;
+	border-bottom:none;
+	padding-top:5px;
+	padding-right:5px;
+	background-color:#ffffff;
+	cursor:move;
+}
+
+.ui-dialog .ui-dialog-titlebar-close{
+    background-color:red;
+    color:#fff;
+    float:right;
+    border:none;
+}
+
+.ui-dialog .ui-dialog-buttonpane button
+{
+    background-color: #102a46;
+    color: #fff;
+    display:none;
+}
+
+.ui-dialog-buttonset{
+    float: right !important;
+}
+/* FINAL */

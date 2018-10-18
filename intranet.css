@@ -1,0 +1,83 @@
+﻿
+#destaque {
+	width:980px;
+	margin:20px 20px 40px 20px;
+	height:220px;
+}
+	
+	
+#yammer {
+	width:705px;
+	height:600px;
+	margin:0 20px 0 0;
+	display:table;
+}
+
+
+#contentRow {
+	margin-top:100px;
+}
+
+
+.imgitem {
+width:120px;
+height:120px;
+	float:left;
+	margin:20px;
+}
+
+.titulo, .ms-webpart-titleText, .ms-webpart-titleText.ms-webpart-titleText
+ {
+	font-size:18px !Important;
+	font-weight:bold !Important;
+	color:#0066CC  !Important;
+	font-family:"Segoe UI Light" !Important;
+}
+
+
+
+/* aniversariantes  */
+
+
+img.ms-peopleux-userImg, #UserPersonaContainer {
+	float:left !important;
+}
+
+.ms-srch-people-item {
+	width:470px !important;
+	padding-right:10px !important;
+	float:left !important;
+	position:relative !important;
+}
+
+.ms-srch-people-item #UserInfoContainer {
+	width:360px !important;
+}
+
+.ms-srch-group-content {
+	
+}
+
+.ms-srch-people-outerContainer, .ms-srch-people-outerContainer, .ms-srch-resultHover {
+	width:470px!important;
+	float:left !important;
+
+
+}
+
+.ms-srch-people-outerContainer {
+	clear:none !important;
+}
+
+#JobTitleField, #DepartmentField, .ms-srch-ellipsis {
+	text-transform: capitalize !important;
+}
+
+.ms-tableCell {
+border-color:blank;
+}
+
+#WebPartWPQ3 #NoResult{
+/*	display:none !important;*/
+}
+

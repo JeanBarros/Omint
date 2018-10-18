@@ -1,0 +1,31 @@
+﻿.bread{
+height:20px !important;
+max-height:20px !important;
+}
+
+.bread span{
+font-size:12px;
+}
+
+.titulopagina {
+	
+}
+
+.titulopagina span {
+	
+}
+
+.corpopagina {
+	
+}
+
+.corpopagina {
+	width: 919px;
+}
+
+.aniverhome {
+	clear: both;
+	margin-bottom: 20px;
+	height: 84px;	
+	color: rgb(0, 55, 119);
+}

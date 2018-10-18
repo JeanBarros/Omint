@@ -1,0 +1,271 @@
+﻿/* Carrousel */
+.carrosel, #carousel,#MSOZoneCell_WebPartctl00_ctl46_g_ee068e5e_0119_41c6_8e6b_7914b5488db0  {
+	z-index:1!important;
+}
+
+.noticiaItemHome a, .noticiaItemHome a:hover, .noticiaItemHome a:link{
+	color:#102a46;
+}
+
+#DeltaPlaceHolderMain {
+margin-top:40px;
+}
+
+.TitNoticiaHome,.TitNoticiaHome:active, .TitNoticiaHome:link {
+	 font-size:14px;
+	 color:rgb(119, 119, 119);
+}
+img.imgBusca {
+	padding-top:6px;
+	margin-right:6px
+}
+
+img.imgthumb {
+	width:72px;
+	height:72px;
+}
+
+.noticiaItemHome a img {
+
+	margin:-5px 6px 0 0;
+}
+
+.noticiaItemHome {
+	clear:both;
+	padding-top:5px!important
+}
+
+.painelDestaques, .sessaoBotoesVejaMais{
+	background-color: #eaeaea;
+	margin-left: -35px !important;
+    margin-right: -35px !important;
+}
+
+.sessaoBotoesVejaMais{
+	padding-bottom: 25px;
+}
+
+.box-noticias-home, .box-eventos-home, .container-scrolling{
+	background-color: #ffffff;
+}
+
+.box-noticias-home .col-md-8{ 
+	padding-left:0;
+}
+
+.box-noticias-home div, .box-eventos-home a, .box-aniversariantes-home a{
+	transition-duration: 0.4s;
+}
+
+.resumoNoticia a:hover, .resumoNoticiasInterna a:hover, .box-eventos-interna a:hover, 
+.box-eventos-home a:hover, .resumoAniversario a:hover, .box-aniversariantes-interna :hover{
+	color: #a19062 !important;
+}
+
+/*.box-noticias-home .resumoNoticia:hover, .box-eventos-home .resumoEvento div:hover, .resumoAniversario:hover{
+	background-color: #d3cebb;
+}*/
+
+.box-noticias-home .resumoNoticia div, .box-noticias-home .imagemNoticia div {
+	height: 80px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;	
+}
+
+.box-noticias-home .resumoNoticia, .box-eventos-home .resumoEvento, .resumoAniversario{
+	border-bottom: solid 1px #cccccc;
+}
+
+.box-noticias-home .imagemNoticia {
+	width:80px; 
+	margin-right: 3px;
+}
+
+.imagemNoticia{
+	float: left;
+}
+
+.imagemNoticia div {
+    width:80px;
+	height: 80px;  
+}
+
+.imagemNoticia img, .box-noticias-interna img {
+	width:80px;
+}
+
+.box-noticias-interna img{
+	margin-right: 10px;
+}
+
+.resumoNoticia div{
+    height: 80px;
+	overflow: hidden;	
+}
+
+.box-noticias-lateral .resumoNoticia div{
+	width: 125px;
+	height: 72px !important;
+	padding: 10px;
+	background-color: #f1edde;
+	margin-bottom: 10px;
+}
+
+.box-noticias-lateral img{
+	width:72px;
+}
+
+.box-noticias-lateral .resumoNoticia p{
+	font-size: 14px;
+}
+
+.resumoNoticia, .resumoEvento{
+	color:#102a46;
+}
+
+.resumoNoticia a, .resumoEvento a, .resumoNoticiasInterna a, .resumoAniversario a{
+	color:#102a46;
+	text-decoration: none;
+}
+
+.resumoNoticia span, .resumoEvento span, .resumoNoticiasInterna span{
+	font-weight:bold;
+}
+
+.resumoNoticia p, .resumoEvento p, .resumoNoticiasInterna p{
+	margin-top: 10px;
+    height: 55px;
+    overflow: hidden;
+}
+
+.resumoNoticiasInterna, .box-eventos-interna{
+	font-size: 18px;
+}
+
+.box-noticias-interna .col-md-9, .box-noticias-interna .col-md-2{
+	padding: 0;
+}
+
+.box-noticias-interna .col-md-2{
+	max-width: 13%;
+}
+
+.box-noticias-interna .col-md-10{
+	max-width: 100%;
+	padding-right: 0;
+}
+
+.resumoNoticiasInterna p{
+	padding-top: 10px;
+}
+
+#maisNoticias li{
+	height: 72px;
+	padding: 5px;
+	font-size:13px;
+	margin-bottom: 10px; 
+	background-color: #ded4bb;
+	overflow:hidden;
+}
+
+#maisNoticias p{
+	margin-top:10px;
+}
+
+#maisNoticias a:link, #categorias a:link, #maisNoticias a:visited, #categorias a:visited
+{
+	color:#102a46;
+}
+
+.resumoEvento p{
+	height:auto!important;
+}
+
+.box-eventos-home .resumoEvento{
+	padding: 5px;
+	height: 90px;
+	margin-bottom: 11px;
+}
+
+#pageTitle, #DeltaTopNavigation {
+	display:none !important;
+}
+
+/* ANIVERSARIANTES */
+
+.aniversariantesInterna{
+	width: 100%;
+	height:80px;
+	margin-bottom:20px;
+}
+
+.floatL {float:left;margin:0 10px 18px 2px} 
+.floatR {padding-top:5px} 
+.profile {padding:6px 8px 12px 0} 
+.editProfile{margin-left:100px;}  
+
+.resumoAniversario {
+	width: 270px;
+    margin-bottom: 10px;
+    padding-bottom: 11px;
+}
+
+.aniversariantes a, .aniversariantes :visited, .aniversariantesInterna a, .aniversariantesInterna :visited {
+	color: #102a46;
+	text-decoration: none;
+}
+
+.imagemColaborador{
+	width: 80px;
+	float: left;
+	margin-right: 7px;
+}
+
+.imagemColaborador img{
+	height: 80px;
+}
+
+.nomeColaborador{
+	font-weight: bold;
+	height: 44px;
+	padding: 5px;
+}
+
+.dataAniversario{
+	font-size: 15px;
+}
+
+.container-scrolling {
+	height: 290px;
+	width: 300px;
+	max-width:100%;
+}
+
+.btnVejaMais{
+	width: 100%;
+	margin-top: 20px;
+	font-size: 22px;
+	color: #ffffff !important;
+    background-color: #62768e;
+    border: none;    
+    padding: 16px;
+    text-align: center;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btnVejaMais:link{    
+	text-decoration: none;
+}
+
+.btnVejaMais:hover {
+    background-color: #dedede;
+    color: #32465e!important;
+}
+
+.box-yammer{
+	margin-top: 40px;
+}
