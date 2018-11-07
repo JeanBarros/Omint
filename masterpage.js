@@ -124,6 +124,27 @@ $(document).ready(function(){
 	$("#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager li span span .menu-item-text").css("color", "#003763");
     $(".ms-core-listMenu-root li ul").css("display", "none");
     
+    // Formulários (Dispform.Aspx)
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+    $("#zz10_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
+        // Verifica se o menu lateral é de um subsite - Alguns implementa o evento "onclilck" na div
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))            
+            ShowHideSubmenu(0, 2, 3, 1)        
+        else
+            ShowHideSubmenu(0, 1, 2, 1)
+    });
+
+    // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
+    // de acordo com o indíce do elemento li
+    $("#zz10_V4QuickLaunchMenu li span span .menu-item-text").eq(1).click(function(){
+        if($('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager div').attr("onclick"))
+            ShowHideSubmenu(1, 3, 2, 0)
+        else
+            ShowHideSubmenu(1, 2, 1, 0)            
+    });
+    
+    // Home
     // Chama a função para exibir ou mostrar os subitens do menu em cada conjunto de itens específico, 
     // de acordo com o indíce do elemento li
    $("#zz11_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 
@@ -141,7 +162,7 @@ $(document).ready(function(){
             ShowHideSubmenu(1, 3, 2, 0)
         else
             ShowHideSubmenu(1, 2, 1, 0)            
-    });
+    });    
 
     // subsite 1
     $("#zz12_V4QuickLaunchMenu li span span .menu-item-text").eq(0).click(function(){ 

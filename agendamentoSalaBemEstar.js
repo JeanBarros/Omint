@@ -256,12 +256,17 @@ function onSuccess1(sender, args) {
             currentListItems1 = enumerator1.get_current();
                             
             // Armazena o horário inicial do agendamento já cadastrado na lista
-			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
-            var horaInicio = currentListItems1.get_item("EventDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+            var horaInicio = new Date(currentListItems1.get_item("EventDate"))
+            
+            // O método get_item() da biblioteca SP.JS recupera o valor da coluna que contém uma data e hora e subtrai uma hora do valor retornado.
+            // Para que a checagem entre horários funcione corretamente, é necessáio adicionar "1" a função getHour.
+            // A função getMinutes retorna apenas um ZERO qunado o valor é menor que 10 minutos.
+			// O operador ternário verifica essa condição e adiciona mais um ZERO, definindo assim o padrão de minutos como :00
+            var inicioEventoAgendado = (horaInicio.getHours() + 1) + ":" + (horaInicio.getMinutes() < 10 ? '0' + horaInicio.getMinutes() : horaInicio.getMinutes())
             
             // Armazena o horário final já cadastrado na lista
-			// Remove os "segundos (00:00)" da data retornada e aplica o padrão (HH:MM)
-            var horaFim = currentListItems1.get_item("EndDate").toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+			var horaFim = new Date(currentListItems1.get_item("EndDate"))			
+            var finalEventoAgendado = (horaFim.getHours() + 1) + ":" + (horaFim.getMinutes() < 10 ? '0' + horaFim.getMinutes() : horaFim.getMinutes())
             
             // Verifica se a data de início e fim selecionadas coincidem com algum agendamento já existente na lista 
             if ($('.dataInicioAgendamento input').val() == currentListItems1.get_item("EventDate").toLocaleDateString() &&
@@ -272,25 +277,27 @@ function onSuccess1(sender, args) {
             	var horaInicioSelecionadaDrpDown = $('.dataInicioAgendamento .ms-dttimeinput select').val();
 				var horaInicioSelecionadaDrpDown1 = $('.dataInicioAgendamento .ms-dttimeinput select').eq(1).val();
 									
-				var horaInicioSelecionada =  horaInicioSelecionadaDrpDown + horaInicioSelecionadaDrpDown1;
+				var horaInicioSelecionada =  ConverterStringToDateTime($('.dataInicioAgendamento input').val(), 
+				horaInicioSelecionadaDrpDown, horaInicioSelecionadaDrpDown1)
 				
 				// Armazena na variável o horário de término selecionado no formulário
             	// uma variável para o dropDown de horas e outra para os minutos.
             	var horaTerminoSelecionadaDrpDown = $('.dataFinalAgendamento .ms-dttimeinput select').val();
 				var horaTerminoSelecionadaDrpDown1 = $('.dataFinalAgendamento .ms-dttimeinput select').eq(1).val();
 									
-				var horaTerminoSelecionada =  horaTerminoSelecionadaDrpDown + horaTerminoSelecionadaDrpDown1;
+				var horaTerminoSelecionada =  ConverterStringToDateTime($('.dataFinalAgendamento input').val(), 
+				horaTerminoSelecionadaDrpDown, horaTerminoSelecionadaDrpDown1)
 				
 				// Verifica se para a data selecionada os horários de início e fim coincidem com algum já agendado            	
-            	if (horaInicioSelecionada == horaInicio){
+            	if (horaInicioSelecionada == inicioEventoAgendado){
             		agendamentoConflitante = true;            			
             		return;
             	}            		
-            	else if (horaInicioSelecionada <= horaInicio && horaTerminoSelecionada >= horaInicio){
+            	else if (horaInicioSelecionada <= inicioEventoAgendado && horaTerminoSelecionada >= inicioEventoAgendado){
             		agendamentoConflitante = true;            		
             		return;
             	}
-            	else if (horaInicioSelecionada >= horaInicio && horaInicioSelecionada < horaFim){
+            	else if (horaInicioSelecionada >= inicioEventoAgendado && horaInicioSelecionada <= finalEventoAgendado){
             		agendamentoConflitante = true;
             		return;
             	}
@@ -506,4 +513,23 @@ function ConverterDatas(mes){
 	}
 	
 	return mes
+}
+
+// Converte strings de data e hora para DateTime em formato UTC
+function ConverterStringToDateTime(dataCompleta, horas, minutos){
+
+	var year = dataCompleta.substring(6)	
+	// O objeto Date inicia a contagem dos meses em Zero e o valor retornado do formulário inicia em Um
+	// A subtração por 1 é necessária é para criar a data corretamente (new Date)
+	var month = parseInt(dataCompleta.substring(3,5)) - 1  
+	var day = dataCompleta.substring(0, 2)
+	
+	var hour = parseInt(horas.substring(0,2))
+	var min = minutos
+	
+	var horaCerta = new Date(year,month,day,hour,min)
+		
+	// A função getMinutes retorna apenas um ZERO qunado o valor é menor que 10 minutos
+	// O operador ternário verifica essa condição e adiciona mais um ZERO, definindo assim o padrão de minutos como :00
+	return horaCerta.getHours() + ":" + (horaCerta.getMinutes() < 10 ? '0' + horaCerta.getMinutes() : horaCerta.getMinutes()) 
 }

@@ -59,8 +59,6 @@ function GetAniver() {
 	        console.log("Something went Wrong: ");
 	} 
 	
-	
-	
 		  
 	
      
