@@ -3,10 +3,10 @@ var currentUser;
 var nomeUsuarioLogado;
 var emailUsuarioLogado;
 
-// Executa depois que a página está totalmente carregada
+// Executa depois que a página está totalmente carregada 
 $( window ).load(function() { 
 	
-	$("#txtlocal input").attr("value","Sala Bem Estar");
+	$("#txtlocal input").attr("value","Ambulatório");
 	$("#txtlocal input").attr('readonly', true);
 	
 	var profissionalSelecionado = $(".listaProfissionais option:selected").text();
@@ -123,7 +123,7 @@ function CarregarAbasProfissionais() {
 	ctx.load(lists);
 	var list = lists.getByTitle("Profissionais");
 	var camlQuery = new SP.CamlQuery();
-	camlQuery.set_viewXml("<View><Query><OrderBy><FieldRef Name='diaDaSemana' Ascending='True' /></OrderBy></Query></View>");
+	camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Categoria' /><Value Type='Choice'>Ambulatório</Value></Eq></Where><OrderBy><FieldRef Name='diaDaSemana' Ascending='True' /></OrderBy></Query></View>");
 
 	itemCollection = list.getItems(camlQuery);
 	ctx.load(itemCollection);
@@ -179,7 +179,7 @@ if (itemCollection.get_count() > 0) {
 		CarregarQueryString()
 			  
 		// Define o valor inicial do atributo SRC do iframe quando a págia é carregada
-		$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosBemEstar/' + $('#ui-id-1').text().trim().replace(/\s/g, "-") + '.aspx');
+		$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosAmbulatorio/' + $('#ui-id-1').text().trim().replace(/\s/g, "-") + '.aspx');
 		
 		var nomeDoProfissional = $('#ui-id-1').text()
 		
@@ -221,7 +221,7 @@ if (itemCollection.get_count() > 0) {
 			// Modifica o valor do link "Adicionar" no calendário para enviar os dados via QueryString - O Formulário abre em uma nova aba ao invés da modal padrão
 			$("#ctl00_ctl47_g_1c0b2aba_7186_4cf2_bfad_7a607aa69c21_ctl01_ctl00_ctl00 a").attr("href", "javascript:void(0), EnviarDados()");
 			
-			$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosBemEstar/' + $('#ui-id-' + indxAbaSelecionada + '').text().trim().replace(/\s/g, "-") + '.aspx'); 
+			$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosAmbulatorio/' + $('#ui-id-' + indxAbaSelecionada + '').text().trim().replace(/\s/g, "-") + '.aspx'); 
 			
 	    });   
 	}                    
@@ -345,7 +345,7 @@ function CriarQueryString(nome, funcao, indice, DiaDeAtendimento, inicioAtendime
 }
 
 function EnviarDados(){
-	window.location = "https://omintbr.sharepoint.com/Lists/AgendaSalaBemEstar/NewFormCustom.aspx?" + parametros;	
+	window.location = "https://omintbr.sharepoint.com/Lists/AgendaAmbulatorio/NewFormCustom.aspx?" + parametros;	
 }
 
 // inicializa a variável que armazena os dias que o profissional atende

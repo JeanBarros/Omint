@@ -1,5 +1,6 @@
 ﻿window.onload = function() {
     ExibirAniversariantes()
+    FormatarLayout()
 }
 
 function ExibirAniversariantes(){
@@ -117,4 +118,8 @@ function ExibirAniversariantes(){
         }        
         return numeroMes
     }
+}
+
+function FormatarLayout(){
+    $("#MSOZoneCell_WebPartWPQ5").addClass("resumoAniversario");
 }
