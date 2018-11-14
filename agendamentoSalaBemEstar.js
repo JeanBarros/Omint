@@ -1,20 +1,16 @@
-﻿var agendamentoConflitante = false;
+﻿var agendamentoConflitante = false; 
 var currentUser;
 var nomeUsuarioLogado;
 var emailUsuarioLogado;
 
-// Executa depois que a página está totalmente carregada
-$( window ).load(function() { 
-	
+// Executa depois que a página está totalmente carregada 
+window.onload = function() {    
+
 	$("#txtlocal input").attr("value","Sala Bem Estar");
 	$("#txtlocal input").attr('readonly', true);
 	
 	var profissionalSelecionado = $(".listaProfissionais option:selected").text();
 	    
-	$(".listaFuncoes select").change(function(){
-		//CarregarAbasProfissionais();
-    }); 
-    
 	$(".dataInicioAgendamento .ms-dttimeinput select").change(function(){
 		VerificarAgendamentos() 
     });
@@ -25,8 +21,7 @@ $( window ).load(function() {
     
     // Chama o método depois de carregar o perfil do usuário logado
     ConsultarRamalColaborador();
-     
-});
+}
 
 // Executa igual o "(document).ready()"
 ExecuteOrDelayUntilScriptLoaded(function() { 
@@ -123,7 +118,7 @@ function CarregarAbasProfissionais() {
 	ctx.load(lists);
 	var list = lists.getByTitle("Profissionais");
 	var camlQuery = new SP.CamlQuery();
-	camlQuery.set_viewXml("<View><Query><OrderBy><FieldRef Name='diaDaSemana' Ascending='True' /></OrderBy></Query></View>");
+	camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Categoria' /><Value Type='Choice'>Sala Bem Estar</Value></Eq></Where><OrderBy><FieldRef Name='diaDaSemana' Ascending='True' /></OrderBy></Query></View>");
 
 	itemCollection = list.getItems(camlQuery);
 	ctx.load(itemCollection);
@@ -162,11 +157,11 @@ if (itemCollection.get_count() > 0) {
 			+'<tr><td style="border-bottom: solid 1px #9bcde6">Serviços</td>'
 			+'<td style="background-color:#9bcde6; border-bottom: solid 1px #ffffff">' + currentListItems.get_item("Servi_x00e7_os") + '</td></tr>'
 			+'<tr><td style="border-bottom: solid 1px #9bcde6">Dia de atendimento</td>'
-			+'<td id="diaAtendimento" style="background-color:#9bcde6; border-bottom: solid 1px #ffffff">' + currentListItems.get_item("Dias_x0020_de_x0020_atua_x00e7__") + 			'</td></tr>'
-			+'<tr><td style="border-bottom: solid 1px #9bcde6">Horário de atendimento</td>'
-			+'<td style="background-color:#9bcde6; border-bottom: solid 1px #ffffff">' + currentListItems.get_item("Hora_x0020_inicial_x0020_atendim") + '</td></tr>' 
-			+'<tr><td style="border-bottom: solid 1px #9bcde6">Duração do serviço</td>'
-			+'<td style="background-color:#9bcde6">' + currentListItems.get_item("Dura_x00e7__x00e3_o_x0020_do_x00") + '</td></tr>'
+			+'<td id="diaAtendimento" style="background-color:#9bcde6; border-bottom: solid 1px #ffffff">' + currentListItems.get_item("Dias_x0020_de_x0020_atua_x00e7__") 
+			+'</td></tr><tr><td style="border-bottom: solid 1px #9bcde6">Horário de atendimento</td>'
+			+'<td id="horarioAtendimento" style="background-color:#9bcde6; border-bottom: solid 1px #ffffff"><span id="horaInicio">' + currentListItems.get_item("Hora_x0020_inicial_x0020_atendim") 
+			+'</span> até ' + '<span id="horaFim">' + currentListItems.get_item("Hora_x0020_final_x0020_atendimen") + '</span></td></tr><tr><td style="border-bottom: solid 1px #9bcde6">Duração do serviço</td>'
+			+'<td id="duracaoAtendimento" style="background-color:#9bcde6">' + currentListItems.get_item("Dura_x00e7__x00e3_o_x0020_do_x00") + '</td></tr>'
 			+'<tr><td colspan="2" style="border: solid 1px #9bcde6; padding-top:10px">' + currentListItems.get_item("Descri_x00e7__x00e3_o") + '</td></tr></table></div>');
         }
         
@@ -181,14 +176,11 @@ if (itemCollection.get_count() > 0) {
 		// Define o valor inicial do atributo SRC do iframe quando a págia é carregada
 		$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosBemEstar/' + $('#ui-id-1').text().trim().replace(/\s/g, "-") + '.aspx');
 		
+		// obtém os detalhes do profissional
 		var nomeDoProfissional = $('#ui-id-1').text()
-		
-		if(nomeDoProfissional == "Karina Nascimento")
-		{
-			var inicioAtendimento = "08:30"
-			var finalAtendimento = "16:30"				
-			var duracaoServico = 40
-		}
+		var inicioAtendimento = $('#horaInicio').text()
+		var finalAtendimento = $('#horaFim').text()				
+		var duracaoServico = $('#duracaoAtendimento').text()
 		
 		// Define os dados a serem passados via QueryString para a primeira Aba selecionada ao carregar a pagina 
 		CriarQueryString($('#ui-id-1').text(), $('#tabs-1 #funcao').text(), 1, "Segunda-feira", inicioAtendimento, finalAtendimento, duracaoServico)
@@ -200,6 +192,8 @@ if (itemCollection.get_count() > 0) {
 			
 			// Armazena o nome, a função e o dia de atendimento do profissinal nas variáveis
 			nomeDoProfissional = $('#ui-id-' + indxAbaSelecionada + '').text()
+			duracaoServico =  $('#tabs-' + indxAbaSelecionada + ' #duracaoAtendimento').text()
+
 			var funcaoDoProfissional = $('#tabs-' + indxAbaSelecionada + ' #funcao').text()
 			var diaAtendimento = $('#tabs-' + indxAbaSelecionada + ' #diaAtendimento').text()
 			
@@ -208,13 +202,6 @@ if (itemCollection.get_count() > 0) {
 			
 			$(".listaFuncoes option").remove(); 
 			$(".listaFuncoes select").prepend('<option value="' + indxAbaSelecionada + '">' + funcaoDoProfissional + '</option>');
-			
-			if(nomeDoProfissional == "Karina Nascimento")
-			{
-				inicioAtendimento = "08:30"
-				finalAtendimento = "16:30"				
-				duracaoServico = 40
-			}
 			
 			CriarQueryString(nomeDoProfissional, funcaoDoProfissional, indxAbaSelecionada, diaAtendimento, inicioAtendimento, finalAtendimento, duracaoServico)
 			
@@ -258,16 +245,9 @@ function onSuccess1(sender, args) {
             // Armazena o horário inicial do agendamento já cadastrado na lista
             var horaInicio = new Date(currentListItems1.get_item("EventDate"))
             
-            // O método get_item() da biblioteca SP.JS recupera o valor da coluna que contém uma data e hora e subtrai uma hora do valor retornado.
-            // Para que a checagem entre horários funcione corretamente, é necessáio adicionar "1" a função getHour.
-            // A função getMinutes retorna apenas um ZERO qunado o valor é menor que 10 minutos.
-			// O operador ternário verifica essa condição e adiciona mais um ZERO, definindo assim o padrão de minutos como :00
-            var inicioEventoAgendado = (horaInicio.getHours() + 1) + ":" + (horaInicio.getMinutes() < 10 ? '0' + horaInicio.getMinutes() : horaInicio.getMinutes())
-            
-            // Armazena o horário final já cadastrado na lista
+			// Armazena o horário final já cadastrado na lista
 			var horaFim = new Date(currentListItems1.get_item("EndDate"))			
-            var finalEventoAgendado = (horaFim.getHours() + 1) + ":" + (horaFim.getMinutes() < 10 ? '0' + horaFim.getMinutes() : horaFim.getMinutes())
-            
+			
             // Verifica se a data de início e fim selecionadas coincidem com algum agendamento já existente na lista 
             if ($('.dataInicioAgendamento input').val() == currentListItems1.get_item("EventDate").toLocaleDateString() &&
             	$('.dataFinalAgendamento input').val() == currentListItems1.get_item("EndDate").toLocaleDateString()){
@@ -289,15 +269,15 @@ function onSuccess1(sender, args) {
 				horaTerminoSelecionadaDrpDown, horaTerminoSelecionadaDrpDown1)
 				
 				// Verifica se para a data selecionada os horários de início e fim coincidem com algum já agendado            	
-            	if (horaInicioSelecionada == inicioEventoAgendado){
+            	if (horaInicioSelecionada == horaInicio){
             		agendamentoConflitante = true;            			
             		return;
             	}            		
-            	else if (horaInicioSelecionada <= inicioEventoAgendado && horaTerminoSelecionada >= inicioEventoAgendado){
+            	else if (horaInicioSelecionada <= horaInicio && horaTerminoSelecionada >= horaInicio){
             		agendamentoConflitante = true;            		
             		return;
             	}
-            	else if (horaInicioSelecionada >= inicioEventoAgendado && horaInicioSelecionada <= finalEventoAgendado){
+            	else if (horaInicioSelecionada >= horaInicio && horaInicioSelecionada <= horaFim){
             		agendamentoConflitante = true;
             		return;
             	}
@@ -309,7 +289,7 @@ function onSuccess1(sender, args) {
 }
 
 //PreSaveAction code to validate
-function PreSaveAction(itemDuplicado)
+function PreSaveAction()
 {
    if (agendamentoConflitante){
    		alert('Já existe uma reserva para o período selecionado.');   		
@@ -367,12 +347,35 @@ function CarregarQueryString(){
 	}
 		
 	// Define o dropdown de profissionais com o nome do profissional na primeira aba sempre que a página for carregada
+	var arrProfissionais = $(".listaProfissionais option")
+
+	for(i=0; i < arrProfissionais.length;i++)
+	{ 
+		if (arrProfissionais[i].text == data[0])
+
+		// obtém o valor da opção dentro do dropdown
+		var valorProfissional = arrProfissionais[i].value		
+	}
+
 	$(".listaProfissionais option").remove(); 
-	$(".listaProfissionais select").prepend('<option value=' + data[2] + '>' + data[0] + '</option>');
+	$(".listaProfissionais select").prepend('<option value=' + valorProfissional + '>' + data[0] + '</option>');
+	//$(".listaProfissionais select").attr("disabled","disabled")
+
+	// Final
 	
 	// Define o dropdown de funções com o nome do profissional na primeira aba sempre que a página for carregada
+	var arrFuncoes = $(".listaFuncoes option")
+
+	for(i=0; i < arrFuncoes.length;i++)
+	{ 
+		if (arrFuncoes[i].text == data[1])
+
+		// obtém o valor da opção dentro do dropdown
+		var valorFuncao = arrFuncoes[i].value		
+	}
+
 	$(".listaFuncoes option").remove(); 
-	$(".listaFuncoes select").prepend('<option value=' + data[2] + '>' + data[1] + '</option>');
+	$(".listaFuncoes select").prepend('<option value=' + valorFuncao + '>' + data[1] + '</option>');
 	
 	// O elemento com index 3 retorna os dias da semana que o profissional atende
 	diasDeAtendimento = data[3];
@@ -531,5 +534,6 @@ function ConverterStringToDateTime(dataCompleta, horas, minutos){
 		
 	// A função getMinutes retorna apenas um ZERO qunado o valor é menor que 10 minutos
 	// O operador ternário verifica essa condição e adiciona mais um ZERO, definindo assim o padrão de minutos como :00
-	return horaCerta.getHours() + ":" + (horaCerta.getMinutes() < 10 ? '0' + horaCerta.getMinutes() : horaCerta.getMinutes()) 
+	//return horaCerta.getHours() + ":" + (horaCerta.getMinutes() < 10 ? '0' + horaCerta.getMinutes() : horaCerta.getMinutes()) 
+	return horaCerta 
 }
