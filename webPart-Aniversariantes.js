@@ -1,6 +1,11 @@
-﻿window.onload = function() {
+﻿$(document).ready(function(){
+    OcultarWebPart()    
+});
+
+window.onload = function() {
+
     ExibirAniversariantes()
-    FormatarLayout()
+    $("#MSOZoneCell_WebPartWPQ5").addClass("resumoAniversario");
 }
 
 function ExibirAniversariantes(){
@@ -54,7 +59,7 @@ function ExibirAniversariantes(){
         if (anivesario >= dataAtual && anivesario <= proximos30Dias)
         {
             $(id_Aniversariante).css("display","block")
-        }
+        }                
     }
     
     // Converte o numero do mês para o nome equivalente
@@ -118,8 +123,17 @@ function ExibirAniversariantes(){
         }        
         return numeroMes
     }
+
+    $(".box-aniversariantes-home").css("visibility","visible")
+    $("#loadingArea").css("display","none")    
 }
 
-function FormatarLayout(){
-    $("#MSOZoneCell_WebPartWPQ5").addClass("resumoAniversario");
+function OcultarWebPart(){    
+
+    // A webpart de aniversariantes faz o carregamento de todos os itens antes de filtrá-los
+    // Exibe todos os colaboradores, independente do mês de aniversário
+    // Oculta a webpart até que o carregamento e filtragem esteja totalmente concluída.
+    $(".box-aniversariantes-home").css("visibility","hidden")
+    $(".sb-content").append("<div id='loadingArea'>Carregando...</div>")
+    $("#loadingArea").css({'padding' : '10px', 'font-weight' : 'bold'})
 }

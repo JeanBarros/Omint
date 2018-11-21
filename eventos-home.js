@@ -11,7 +11,7 @@ function GetEventos() {
 	ctxEvnts.load(listsEvnts);
 	var listEvnts = listsEvnts.getByTitle("Agenda");
 	var camlQueryEvnts = new SP.CamlQuery();
-	camlQueryEvnts.set_viewXml("<View><Query><Where><Geq><FieldRef Name='EventDate' /><Value IncludeTimeValue='TRUE' Type='DateTime'>" + dataCorrente.toISOString() + "</Value></Geq></Where><OrderBy><FieldRef Name='Created' Ascending='True' /></OrderBy></Query><RowLimit>3</RowLimit></View>");
+	camlQueryEvnts.set_viewXml("<View><Query><Where><Geq><FieldRef Name='EventDate' /><Value IncludeTimeValue='TRUE' Type='DateTime'>" + dataCorrente.toISOString() + "</Value></Geq></Where><OrderBy><FieldRef Name='EventDate' Ascending='True' /></OrderBy></Query><RowLimit>3</RowLimit></View>");
 
 	itemCollectionEvnts = listEvnts.getItems(camlQueryEvnts);
 	ctxEvnts.load(itemCollectionEvnts);

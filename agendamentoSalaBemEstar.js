@@ -181,6 +181,9 @@ if (itemCollection.get_count() > 0) {
 		var inicioAtendimento = $('#horaInicio').text()
 		var finalAtendimento = $('#horaFim').text()				
 		var duracaoServico = $('#duracaoAtendimento').text()
+		var funcao = $('#funcao').text()
+		
+		ExibirOcultarAgendamento(funcao)
 		
 		// Define os dados a serem passados via QueryString para a primeira Aba selecionada ao carregar a pagina 
 		CriarQueryString($('#ui-id-1').text(), $('#tabs-1 #funcao').text(), 1, "Segunda-feira", inicioAtendimento, finalAtendimento, duracaoServico)
@@ -209,6 +212,8 @@ if (itemCollection.get_count() > 0) {
 			$("#ctl00_ctl47_g_1c0b2aba_7186_4cf2_bfad_7a607aa69c21_ctl01_ctl00_ctl00 a").attr("href", "javascript:void(0), EnviarDados()");
 			
 			$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosBemEstar/' + $('#ui-id-' + indxAbaSelecionada + '').text().trim().replace(/\s/g, "-") + '.aspx'); 
+			
+			ExibirOcultarAgendamento(funcaoDoProfissional)
 			
 	    });   
 	}                    
@@ -536,4 +541,16 @@ function ConverterStringToDateTime(dataCompleta, horas, minutos){
 	// O operador ternário verifica essa condição e adiciona mais um ZERO, definindo assim o padrão de minutos como :00
 	//return horaCerta.getHours() + ":" + (horaCerta.getMinutes() < 10 ? '0' + horaCerta.getMinutes() : horaCerta.getMinutes()) 
 	return horaCerta 
+}
+
+function ExibirOcultarAgendamento(funcaoProfissional){
+
+	if(funcaoProfissional == "Sapateiro" || funcaoProfissional == "Costureira"){		
+		$(".btn-primary").parent().css("display","none")
+		$("#profissionaisBemEstar").css("display","none")
+	}
+	else{
+		$(".btn-primary").parent().css("display","block")
+		$("#profissionaisBemEstar").css("display","block")
+	}
 }
