@@ -27,7 +27,7 @@ window.onload = function() {
 ExecuteOrDelayUntilScriptLoaded(function() { 
         
      VerificarAgendamentos()     
-     CarregarAbasProfissionais();
+     CarregarAbasProfissionais(); 
      ObterUsuarioLogado();          
                 
 }, "SP.js");
@@ -214,6 +214,8 @@ if (itemCollection.get_count() > 0) {
 			$("#profissionaisBemEstar").attr('src','/Paginas/CalendariosBemEstar/' + $('#ui-id-' + indxAbaSelecionada + '').text().trim().replace(/\s/g, "-") + '.aspx'); 
 			
 			ExibirOcultarAgendamento(funcaoDoProfissional)
+
+			ObterHorariosDeAtendimento(diaAtendimento)
 			
 	    });   
 	}                    
@@ -552,5 +554,25 @@ function ExibirOcultarAgendamento(funcaoProfissional){
 	else{
 		$(".btn-primary").parent().css("display","block")
 		$("#profissionaisBemEstar").css("display","block")
+	}
+}
+
+function ObterHorariosDeAtendimento(diaAtendimento){
+
+	var diasDeAtendimento = diaAtendimento.split(','); 
+
+	if(diasDeAtendimento.length > 1)
+	{
+		$("#tabs-4 table tbody tr").eq(4).after("<tr><td>xxx</td></tr>")	
+	}
+	
+	//diasDeAtendimento.forEach(logArrayElements)
+}
+
+function logArrayElements(element, index, array) {
+	
+	if(array.length > 1){	
+		//console.log("a[" + index + "] = " + element);
+		$("#tabs-4 table tbody tr").eq(4).after("<tr><td>xxx</td></tr>") 
 	}
 }

@@ -245,24 +245,28 @@ $(document).ready(function(){
     }
     // Final
 
-    // Modal - Jean Barros 03/10/18
+    // Modal - Jean Barros 28/11/18
     //$('#zz11_RootAspMenu li a').eq(3)
     $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').removeAttr("href");
     $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').css("cursor", "pointer")
             
     $('.ms-core-listMenu-root li a:contains(Fala que a gente escuta)').click(function(){					    
-            $( "#dialog-message" ).dialog({			      
-                modal: true,
-                buttons: {
-                Fechar: function() {
-                    $( this ).dialog( "close" );			          
-                }
-                }			      
-            });
-
-            $("#dialog-message").empty();
-            $("#dialog-message").append("<iframe height='400px' width='517px' scrolling='no' src='http://www.omint.com.br/ouvidoria/popup.aspx?_dc=1382127107908' name='iframe_a'></iframe> ");
-            $(".ui-button").eq(0).text("Fechar")			   
-    });
+            
+            $("#modal-formOuvidoria").css("display","block");
+            $("#modal-formOuvidoria").empty();
+            $("#modal-formOuvidoria").append("<div id='loadingBox'>Carregando...</div>");    		
+            
+            // Adiciona o botão para fechar o modal
+            $("#modal-formOuvidoria").append("<div class='btn-closeModal fa fa-window-close'></div>");
+            
+            // Carrega o formulário na div
+            $("#modal-formOuvidoria").append("<embed src='https://www.omint.com.br/ouvidoria/popup.aspx?_dc=1382127107908' width='600' height='517' />");
+            
+            $(".btn-closeModal").click(function(){
+		        $("#modal-formOuvidoria").empty();
+    			$("#modal-formOuvidoria").css("display","none");
+		    });
+		     
+	});		
     // Final
 });
